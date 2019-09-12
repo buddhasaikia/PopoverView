@@ -180,7 +180,7 @@ class PopoverView : RelativeLayout, OnTouchListener {
 
         //Init the relative layout
         popoverView = RelativeLayout(context)
-        popoverView!!.setBackgroundDrawable(resources.getDrawable(popoverBackgroundDrawable, null))
+        popoverView!!.background = resources.getDrawable(popoverBackgroundDrawable, null)
         popoverView!!.addView(viewToEnclose, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
 
     }
@@ -208,25 +208,25 @@ class PopoverView : RelativeLayout, OnTouchListener {
         var yPos = 0
         var arrowHeight = 0
         //Get correct drawable, and get Width, Height, Xpos and yPos depending on the selected arrow direction
-        if (arrowDirection == PopoverView.PopoverArrowDirectionUp) {
+        if (arrowDirection == PopoverArrowDirectionUp) {
             arrowDrawable = resources.getDrawable(popoverArrowUpDrawable)
             arrowWidth = arrowDrawable!!.intrinsicWidth
             arrowHeight = arrowDrawable.intrinsicHeight
             xPos = originRect.centerX() - arrowWidth / 2 - popoverLayoutRect!!.left
             yPos = originRect.bottom - popoverLayoutRect!!.top
-        } else if (arrowDirection == PopoverView.PopoverArrowDirectionDown) {
+        } else if (arrowDirection == PopoverArrowDirectionDown) {
             arrowDrawable = resources.getDrawable(popoverArrowDownDrawable)
             arrowWidth = arrowDrawable!!.intrinsicWidth
             arrowHeight = arrowDrawable.intrinsicHeight
             xPos = originRect.centerX() - arrowWidth / 2 - popoverLayoutRect!!.left
             yPos = originRect.top - arrowHeight - popoverLayoutRect!!.top
-        } else if (arrowDirection == PopoverView.PopoverArrowDirectionLeft) {
+        } else if (arrowDirection == PopoverArrowDirectionLeft) {
             arrowDrawable = resources.getDrawable(popoverArrowLeftDrawable)
             arrowWidth = arrowDrawable!!.intrinsicWidth
             arrowHeight = arrowDrawable.intrinsicHeight
             xPos = originRect.right - popoverLayoutRect!!.left
             yPos = originRect.centerY() - arrowHeight / 2 - popoverLayoutRect!!.top
-        } else if (arrowDirection == PopoverView.PopoverArrowDirectionRight) {
+        } else if (arrowDirection == PopoverArrowDirectionRight) {
             arrowDrawable = resources.getDrawable(popoverArrowRightDrawable)
             arrowWidth = arrowDrawable!!.intrinsicWidth
             arrowHeight = arrowDrawable.intrinsicHeight
@@ -398,17 +398,17 @@ class PopoverView : RelativeLayout, OnTouchListener {
     private fun addAvailableRects(originRect: Rect, arrowDirections: Int) {
         //Get popover rects for the available directions
         possibleRects = HashMap()
-        if (arrowDirections and PopoverView.PopoverArrowDirectionUp != 0) {
-            possibleRects!![PopoverView.PopoverArrowDirectionUp] = getRectForArrowUp(originRect)
+        if (arrowDirections and PopoverArrowDirectionUp != 0) {
+            possibleRects!![PopoverArrowDirectionUp] = getRectForArrowUp(originRect)
         }
-        if (arrowDirections and PopoverView.PopoverArrowDirectionDown != 0) {
-            possibleRects!![PopoverView.PopoverArrowDirectionDown] = getRectForArrowDown(originRect)
+        if (arrowDirections and PopoverArrowDirectionDown != 0) {
+            possibleRects!![PopoverArrowDirectionDown] = getRectForArrowDown(originRect)
         }
-        if (arrowDirections and PopoverView.PopoverArrowDirectionRight != 0) {
-            possibleRects!![PopoverView.PopoverArrowDirectionRight] = getRectForArrowRight(originRect)
+        if (arrowDirections and PopoverArrowDirectionRight != 0) {
+            possibleRects!![PopoverArrowDirectionRight] = getRectForArrowRight(originRect)
         }
-        if (arrowDirections and PopoverView.PopoverArrowDirectionLeft != 0) {
-            possibleRects!![PopoverView.PopoverArrowDirectionLeft] = getRectForArrowLeft(originRect)
+        if (arrowDirections and PopoverArrowDirectionLeft != 0) {
+            possibleRects!![PopoverArrowDirectionLeft] = getRectForArrowLeft(originRect)
         }
 
     }
@@ -429,7 +429,7 @@ class PopoverView : RelativeLayout, OnTouchListener {
         superview = group
 
         //First, add the view to the view group. The popover will cover the whole area
-        val insertParams = android.view.ViewGroup.LayoutParams(android.view.ViewGroup.LayoutParams.FILL_PARENT, android.view.ViewGroup.LayoutParams.FILL_PARENT)
+        val insertParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         group.addView(this, insertParams)
 
         //Now, save rect for the layout (is the same as the superview)
